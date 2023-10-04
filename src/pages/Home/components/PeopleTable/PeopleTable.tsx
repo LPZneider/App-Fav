@@ -3,13 +3,18 @@ import { addFavorites } from "@/redux/states";
 import { AppStore } from "@/redux/store";
 import { Checkbox } from "@mui/material";
 import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // export type PeopleTableProps = {};
 
 const PeopleTable: React.FC = () => {
   const [selectPeople, setSelectPeople] = useState<Person[]>([]);
+  const stateFav = useSelector((store: AppStore) => store.favorites);
+
+  useEffect(() => {
+    setSelectPeople(stateFav);
+  }, [stateFav]);
 
   const dispatch = useDispatch();
 
@@ -71,6 +76,7 @@ const PeopleTable: React.FC = () => {
       renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
     },
   ];
+
   return (
     <DataGrid
       rows={statePeople}

@@ -1,14 +1,12 @@
 import { Person } from "@/models";
-import { addFavorites } from "@/redux/states";
+import { addFavorites, removeFavorite } from "@/redux/states";
 import { AppStore } from "@/redux/store";
 import { Checkbox } from "@mui/material";
 import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export type FavoriteTableProps = {};
-
-const FavoriteTable: React.FC<FavoriteTableProps> = ({}) => {
+const FavoriteTable: React.FC = () => {
   const dispatch = useDispatch();
 
   const stateFavorite = useSelector((store: AppStore) => store.favorites);
@@ -17,7 +15,7 @@ const FavoriteTable: React.FC<FavoriteTableProps> = ({}) => {
     !!stateFavorite.find((p) => p.id === person.id);
 
   const handleChange = (person: Person) => {
-    dispatch(addFavorites(person));
+    dispatch(removeFavorite(person));
   };
 
   const colums = [
@@ -27,7 +25,7 @@ const FavoriteTable: React.FC<FavoriteTableProps> = ({}) => {
       headerName: "",
       sortable: false,
       flex: 1,
-      Width: 50,
+      maxWidth: 50,
       renderCell: (params: GridRenderCellParams) => (
         <>
           {
@@ -62,6 +60,7 @@ const FavoriteTable: React.FC<FavoriteTableProps> = ({}) => {
       renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
     },
   ];
+
   return (
     <DataGrid
       rows={stateFavorite}
