@@ -59,6 +59,13 @@ const FavoriteTable: React.FC = () => {
       minWidth: 150,
       renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
     },
+    {
+      field: "levelOfHappiness",
+      headerName: "😁",
+      flex: 1,
+      maxWidth: 70,
+      renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
+    },
   ];
 
   return (

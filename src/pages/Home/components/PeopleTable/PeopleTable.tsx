@@ -41,7 +41,7 @@ const PeopleTable: React.FC = () => {
       headerName: "",
       sortable: false,
       flex: 1,
-      Width: 50,
+      maxWidth: 50,
       renderCell: (params: GridRenderCellParams) => (
         <>
           {
@@ -73,6 +73,13 @@ const PeopleTable: React.FC = () => {
       headerName: "Company",
       flex: 1,
       minWidth: 150,
+      renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
+    },
+    {
+      field: "levelOfHappiness",
+      headerName: "😁",
+      flex: 1,
+      maxWidth: 70,
       renderCell: (params: GridRenderCellParams) => <>{params.value}</>,
     },
   ];
